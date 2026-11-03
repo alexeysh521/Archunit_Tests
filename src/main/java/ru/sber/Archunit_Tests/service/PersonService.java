@@ -3,7 +3,7 @@ package ru.sber.Archunit_Tests.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.sber.Archunit_Tests.persistance.model.Person;
+import ru.sber.Archunit_Tests.persistance.model.PersonEntity;
 
 import java.util.UUID;
 
@@ -15,7 +15,7 @@ public class PersonService {
     private final PersonRepository personRepository;
 
     public void create(CreateDto dto){
-        Person person = Person.builder()
+        PersonEntity person = PersonEntity.builder()
                 .name(dto.name)
                 .age(dto.age)
                 .carsName(dto.carsName)
@@ -29,7 +29,7 @@ public class PersonService {
     }
 
     public void update(UpdateDto dto){
-        Person person = personRepository.findById(dto.id);
+        PersonEntity person = personRepository.findById(dto.id);
         if(dto.name != null) person.setName(dto.name);
         if(dto.age != null) person.setAge(dto.age);
         if(dto.carsName != null) person.setCarsName(dto.carsName);
