@@ -31,7 +31,7 @@ public class ArchitectureTest {
 
     @ArchTest
     static final ArchRule service_do_not_touch_mappers =
-            noClasses().that().resideInAPackage("..controller..")
+            noClasses().that().resideInAPackage("..service..")
                     .should().dependOnClassesThat().haveSimpleNameEndingWith("Mapper");
 
 }
