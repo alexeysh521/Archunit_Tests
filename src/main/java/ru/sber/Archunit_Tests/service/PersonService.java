@@ -4,13 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.sber.Archunit_Tests.persistance.model.PersonEntity;
+import ru.sber.Archunit_Tests.service.impl.PersonServiceImpl;
 
 import java.util.UUID;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class PersonService {
+public class PersonService implements PersonServiceImpl {
 
     private final PersonRepository personRepository;
 
