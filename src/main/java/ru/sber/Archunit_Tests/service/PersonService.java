@@ -3,6 +3,9 @@ package ru.sber.Archunit_Tests.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.sber.Archunit_Tests.dto.CreateDto;
+import ru.sber.Archunit_Tests.dto.PersonDto;
+import ru.sber.Archunit_Tests.dto.UpdateDto;
 import ru.sber.Archunit_Tests.persistance.model.PersonEntity;
 import ru.sber.Archunit_Tests.service.impl.PersonServiceImpl;
 
@@ -17,9 +20,9 @@ public class PersonService implements PersonServiceImpl {
 
     public void create(CreateDto dto){
         PersonEntity person = PersonEntity.builder()
-                .name(dto.name)
-                .age(dto.age)
-                .carsName(dto.carsName)
+                .name(dto.name())
+                .age(dto.age())
+                .carsName(dto.carsName())
                 .build();
 
         personRepository.save(person);
@@ -30,10 +33,10 @@ public class PersonService implements PersonServiceImpl {
     }
 
     public void update(UpdateDto dto){
-        PersonEntity person = personRepository.findById(dto.id);
-        if(dto.name != null) person.setName(dto.name);
-        if(dto.age != null) person.setAge(dto.age);
-        if(dto.carsName != null) person.setCarsName(dto.carsName);
+        PersonEntity person = personRepository.findById(dto.id());
+        if(dto.name() != null) person.setName(dto.name());
+        if(dto.age() != null) person.setAge(dto.age());
+        if(dto.carsName() != null) person.setCarsName(dto.carsName());
         personRepository.save(person);
     }
 
