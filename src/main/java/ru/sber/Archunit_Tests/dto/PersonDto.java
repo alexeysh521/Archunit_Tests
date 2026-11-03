@@ -1,4 +1,12 @@
 package ru.sber.Archunit_Tests.dto;
 
-public record PersonDto() {
+import java.util.List;
+import java.util.UUID;
+
+public record PersonDto(
+        UUID id,
+        String name,
+        Integer age,
+        List<String> carsName
+) {
 }
