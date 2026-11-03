@@ -1,3 +1,15 @@
 spring:
   application:
     name: Archunit_Tests
+
+  datasource:
+    driver-class-name: com.dbeaver.jdbc.driver.libsql.LibSqlDriver
+    url: ${TURSO_URL}
+    username: ""
+    password: ${TURSO_TOKEN}
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
