@@ -7,6 +7,7 @@ import ru.sber.Archunit_Tests.dto.CreateDto;
 import ru.sber.Archunit_Tests.dto.PersonDto;
 import ru.sber.Archunit_Tests.dto.UpdateDto;
 import ru.sber.Archunit_Tests.persistance.model.PersonEntity;
+import ru.sber.Archunit_Tests.repository.PersonRepository;
 import ru.sber.Archunit_Tests.service.impl.PersonServiceImpl;
 
 import java.util.UUID;
@@ -33,7 +34,7 @@ public class PersonService implements PersonServiceImpl {
     }
 
     public void update(UpdateDto dto){
-        PersonEntity person = personRepository.findById(dto.id());
+        PersonEntity person = personRepository.findById(dto.id()).orElseThrow();
         if(dto.name() != null) person.setName(dto.name());
         if(dto.age() != null) person.setAge(dto.age());
         if(dto.carsName() != null) person.setCarsName(dto.carsName());
