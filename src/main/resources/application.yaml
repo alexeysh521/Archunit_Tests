@@ -3,13 +3,12 @@ spring:
     name: Archunit_Tests
 
   datasource:
-    driver-class-name: com.dbeaver.jdbc.driver.libsql.LibSqlDriver
-    url: ${TURSO_URL}
-    username: ""
-    password: ${TURSO_TOKEN}
+    url: jdbc:postgresql://85.115.160.84:2453/demo-db
+    username: "demo-user"
+    password: O1OA6CPD3tadnCKW7tYImLx10JOfD39pLm7bIAQdI992zi6nni
 
   jpa:
-    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
