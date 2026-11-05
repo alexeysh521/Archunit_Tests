@@ -12,6 +12,7 @@ public record PersonDto(
         List<String> carsName
 ) {
     public static PersonDto convertTo(PersonEntity e) {
-        return new PersonDto(e.getId(), e.getName(), e.getAge(), List.copyOf(e.getCarsName()));
+        return new PersonDto(e.getId(), e.getName(), e.getAge(), e.getCarsName() != null
+                ? List.copyOf(e.getCarsName()) : null);
     }
 }
