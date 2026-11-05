@@ -37,15 +37,17 @@ public class PersonServiceImpl implements PersonService {
                 () -> new EntityNotFoundException("Сущность не найдена"));
     }
 
-    public void update(UpdateDto dto) {
-        PersonEntity person = personRepository.findById(dto.id()).orElseThrow();
-        if (dto.name() != null) person.setName(dto.name());
-        if (dto.age() != null) person.setAge(dto.age());
-        if (dto.carsName() != null) person.setCarsName(dto.carsName());
+    public void update(UUID id, UpdateDto dto){
+        PersonEntity person = personRepository.findById(id).orElseThrow();
+        if(dto.name() != null) person.setName(dto.name());
+        if(dto.age() != null) person.setAge(dto.age());
+        if(dto.carsName() != null) person.setCarsName(dto.carsName());
         personRepository.save(person);
     }
 
     public void delete(UUID id) {
         personRepository.deleteById(id);
     }
+
+    // проверки на существование и тд пока опускаем, задача - сделать тестирование
 }
