@@ -18,16 +18,23 @@ public class ArchitectureTest {
             layeredArchitecture().consideringOnlyDependenciesInLayers()
                     .layer("Controller").definedBy("..controller..")
                     .layer("Service").definedBy("..service..")
-                    .layer("Repo").definedBy("..repo..")
+                    .layer("Repo").definedBy("..repository..")
                     .whereLayer("Controller").mayNotBeAccessedByAnyLayer()
                     .whereLayer("Service").mayOnlyBeAccessedByLayers("Controller")
                     .whereLayer("Repo").mayOnlyBeAccessedByLayers("Service");
 
     @ArchTest
     static final ArchRule services_naming =
-            classes().that().resideInAPackage("..service..")
-                    .should().haveSimpleNameEndingWith("Service")
+            classes().that().resideInAPackage("..service.impl..")
+                    .should().haveSimpleNameEndingWith("ServiceImpl")
                     .andShould().beAnnotatedWith(Service.class);
+
+    @ArchTest
+    static final ArchRule service_naming_interface =
+            classes().that().resideInAPackage("..service")
+                    .should().beInterfaces()
+                    .andShould().haveSimpleNameEndingWith("Service");
+
 
     @ArchTest
     static final ArchRule service_do_not_touch_mappers =
