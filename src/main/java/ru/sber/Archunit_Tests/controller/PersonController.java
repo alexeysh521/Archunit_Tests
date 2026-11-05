@@ -27,8 +27,9 @@ public class PersonController {
     }
 
     @PatchMapping("/update/{id}")
-    public void updatePerson(@PathVariable UUID id, @RequestBody UpdateDto dto){
-        personService.update(dto);
+    public void updatePerson(@PathVariable UUID id,
+                             @RequestBody UpdateDto dto){
+        personService.update(id, dto);
     }
 
     @DeleteMapping("/delete/{id}")
