@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sber.Archunit_Tests.dto.CreateDto;
 import ru.sber.Archunit_Tests.dto.PersonDto;
 import ru.sber.Archunit_Tests.dto.UpdateDto;
@@ -22,6 +23,7 @@ public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
+    @Transactional
     public void create(CreateDto dto) {
         PersonEntity person = PersonEntity.builder()
                 .name(dto.name())
@@ -32,11 +34,12 @@ public class PersonServiceImpl implements PersonService {
         personRepository.save(person);
     }
 
+    @Transactional(readOnly = true)
     public PersonDto get(UUID id) {
         return personRepository.findById(id).map(personMapper::toDto).orElseThrow(
                 () -> new EntityNotFoundException("Сущность не найдена"));
     }
-
+    @Transactional
     public void update(UUID id, UpdateDto dto){
         PersonEntity person = personRepository.findById(id).orElseThrow();
         if(dto.name() != null) person.setName(dto.name());
@@ -44,7 +47,7 @@ public class PersonServiceImpl implements PersonService {
         if(dto.carsName() != null) person.setCarsName(dto.carsName());
         personRepository.save(person);
     }
-
+    @Transactional
     public void delete(UUID id) {
         personRepository.deleteById(id);
     }
