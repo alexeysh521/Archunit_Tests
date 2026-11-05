@@ -9,6 +9,6 @@ import java.util.UUID;
 public interface PersonService {
     void create(CreateDto dto);
     PersonDto get(UUID id);
-    void update(UpdateDto dto);
+    void update(UUID id, UpdateDto dto);
     void delete(UUID id);
 }
