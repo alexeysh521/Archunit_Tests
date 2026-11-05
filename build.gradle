@@ -26,6 +26,8 @@ dependencies {
 	// Source: https://mvnrepository.com/artifact/com.dbeaver.jdbc/com.dbeaver.jdbc.driver.libsql
 	implementation("com.dbeaver.jdbc:com.dbeaver.jdbc.driver.libsql:1.0.8")
 
+	runtimeOnly 'org.postgresql:postgresql'
+
 	implementation 'org.hibernate.orm:hibernate-community-dialects'
 
 	// Source: https://mvnrepository.com/artifact/io.github.cdimascio/dotenv-java
