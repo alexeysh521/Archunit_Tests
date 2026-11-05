@@ -1,5 +1,6 @@
 package ru.sber.Archunit_Tests.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -7,7 +8,7 @@ import ru.sber.Archunit_Tests.dto.CreateDto;
 import ru.sber.Archunit_Tests.dto.PersonDto;
 import ru.sber.Archunit_Tests.dto.UpdateDto;
 import ru.sber.Archunit_Tests.persistance.model.PersonEntity;
-import ru.sber.Archunit_Tests.repository.PersonRepository;
+import ru.sber.Archunit_Tests.persistance.repository.PersonRepository;
 import ru.sber.Archunit_Tests.service.impl.PersonServiceImpl;
 
 import java.util.UUID;
@@ -30,7 +31,8 @@ public class PersonService implements PersonServiceImpl {
     }
 
     public PersonDto get(UUID id){
-        return personRepository.findById(id); // через маппер привести к PersonDto
+        return personRepository.findById(id).map(PersonDto::convertTo).orElseThrow(
+                () -> new EntityNotFoundException("Сущность не найдена"));
     }
 
     public void update(UpdateDto dto){
