@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.sber.Archunit_Tests.dto.CreateDto;
 import ru.sber.Archunit_Tests.dto.PersonDto;
 import ru.sber.Archunit_Tests.dto.UpdateDto;
+import ru.sber.Archunit_Tests.mapper.PersonMapper;
 import ru.sber.Archunit_Tests.persistance.model.PersonEntity;
 import ru.sber.Archunit_Tests.persistance.repository.PersonRepository;
 import ru.sber.Archunit_Tests.service.PersonService;
@@ -19,8 +20,9 @@ import java.util.UUID;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
 
-    public void create(CreateDto dto){
+    public void create(CreateDto dto) {
         PersonEntity person = PersonEntity.builder()
                 .name(dto.name())
                 .age(dto.age())
@@ -30,8 +32,8 @@ public class PersonServiceImpl implements PersonService {
         personRepository.save(person);
     }
 
-    public PersonDto get(UUID id){
-        return personRepository.findById(id).map(PersonDto::convertTo).orElseThrow(
+    public PersonDto get(UUID id) {
+        return personRepository.findById(id).map(personMapper::toDto).orElseThrow(
                 () -> new EntityNotFoundException("Сущность не найдена"));
     }
 
@@ -43,7 +45,7 @@ public class PersonServiceImpl implements PersonService {
         personRepository.save(person);
     }
 
-    public void delete(UUID id){
+    public void delete(UUID id) {
         personRepository.deleteById(id);
     }
 
