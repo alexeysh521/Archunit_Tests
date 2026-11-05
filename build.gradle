@@ -29,6 +29,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 
 	implementation 'org.hibernate.orm:hibernate-community-dialects'
+    runtimeOnly 'org.postgresql:postgresql:42.7.4'
 
 	// Source: https://mvnrepository.com/artifact/io.github.cdimascio/dotenv-java
 	implementation("io.github.cdimascio:dotenv-java:3.2.0")
