@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 
 @AnalyzeClasses(packages = "ru.sber.Archunit_Tests", importOptions = ImportOption.DoNotIncludeTests.class)
@@ -55,10 +54,9 @@ public class ArchitectureTest {
                     .andShould().haveSimpleNameEndingWith("Service");
 
 
-    @ArchTest
-    static final ArchRule service_do_not_touch_mappers =
-            noClasses().that().resideInAPackage("..service..")
-                    .should().dependOnClassesThat().haveSimpleNameEndingWith("Mapper");
+    // Правило "сервисы не должны зависеть от мапперов" удалено: слой мапперов введён
+    // (PersonMapper), и сервис обязан его вызывать. Зависимости мапперов ограничены
+    // в LayerInteractionTest (правило 15: маппер не ходит в сервисы и репозитории).
 
     @ArchTest
     static final ArchRule entities_should_end_with_entity =
